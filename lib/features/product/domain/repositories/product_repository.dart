@@ -4,4 +4,5 @@ import 'package:halalfood/features/product/domain/entities/product.dart';
 
 abstract class ProductRepository {
   Future<Either<ResponseI, List<Product>>> getProducts(int limit, int offset);
+  Future<Either<ResponseI, List<Product>>> getOneProduct(int id);
 }

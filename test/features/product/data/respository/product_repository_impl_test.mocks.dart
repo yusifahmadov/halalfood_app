@@ -47,4 +47,14 @@ class MockProductRemoteDataSourceImpl extends _i1.Mock
         returnValue:
             _i3.Future<List<_i4.ProductModel>>.value(<_i4.ProductModel>[]),
       ) as _i3.Future<List<_i4.ProductModel>>);
+  @override
+  _i3.Future<List<_i4.ProductModel>> getOneProduct(int? id) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getOneProduct,
+          [id],
+        ),
+        returnValue:
+            _i3.Future<List<_i4.ProductModel>>.value(<_i4.ProductModel>[]),
+      ) as _i3.Future<List<_i4.ProductModel>>);
 }

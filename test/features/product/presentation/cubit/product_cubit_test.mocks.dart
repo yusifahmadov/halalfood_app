@@ -12,6 +12,8 @@ import 'package:halalfood/features/product/domain/entities/helper/pagination_par
 import 'package:halalfood/features/product/domain/entities/product.dart' as _i7;
 import 'package:halalfood/features/product/domain/repositories/product_repository.dart'
     as _i2;
+import 'package:halalfood/features/product/domain/usecases/get_one_product_usecase.dart'
+    as _i9;
 import 'package:halalfood/features/product/domain/usecases/get_product_usecase.dart'
     as _i4;
 import 'package:mockito/mockito.dart' as _i1;
@@ -75,6 +77,50 @@ class MockGetProductUseCase extends _i1.Mock implements _i4.GetProductUseCase {
   @override
   _i5.Future<_i3.Either<_i6.ResponseI, List<_i7.Product>>> call(
           _i8.PaginationParams? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [params],
+        ),
+        returnValue:
+            _i5.Future<_i3.Either<_i6.ResponseI, List<_i7.Product>>>.value(
+                _FakeEither_1<_i6.ResponseI, List<_i7.Product>>(
+          this,
+          Invocation.method(
+            #call,
+            [params],
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.ResponseI, List<_i7.Product>>>);
+}
+
+/// A class which mocks [GetOneProductUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetOneProductUseCase extends _i1.Mock
+    implements _i9.GetOneProductUseCase {
+  MockGetOneProductUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.ProductRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeProductRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i2.ProductRepository);
+  @override
+  set repository(_i2.ProductRepository? _repository) => super.noSuchMethod(
+        Invocation.setter(
+          #repository,
+          _repository,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i5.Future<_i3.Either<_i6.ResponseI, List<_i7.Product>>> call(int? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,

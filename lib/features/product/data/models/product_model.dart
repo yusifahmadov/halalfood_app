@@ -9,6 +9,7 @@ class ProductModel extends Product {
       {required super.createdAt,
       required super.description,
       required super.location,
+      required super.image,
       required super.id,
       required super.name});
   factory ProductModel.fromJson(Map<String, dynamic> json) =>

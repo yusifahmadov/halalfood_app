@@ -37,6 +37,23 @@ void main() {
           headers: headers);
       final tasks = await client.getProducts(10, 0);
       expect(tasks, isNotNull);
+      expect(tasks.length, 3);
+
+      expect(tasks, tProducts);
+    });
+  });
+
+  group('getOneProduct', () {
+    test("get one product from url and check with our json", () async {
+      final tProducts =
+          (jsonDecode(jsonReader('product/product.json')) as List<dynamic>)
+              .map((e) => ProductModel.fromJson(e))
+              .toList();
+      server.enqueue(
+          body: jsonEncode(jsonReader('product/product.json')),
+          headers: headers);
+      final tasks = await client.getOneProduct(1);
+      expect(tasks, isNotNull);
       expect(tasks.length, 1);
 
       expect(tasks, tProducts);

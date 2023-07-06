@@ -66,4 +66,46 @@ void main() {
       },
     );
   });
+
+  group('getOneProduct', () {
+    final tProducts =
+        (jsonDecode(jsonReader('product/product.json')) as List<dynamic>)
+            .map((e) => ProductModel.fromJson(e))
+            .toList();
+
+    test(
+      "should return one product when getOneProduct is called from dataSource",
+      () async {
+        when(dataSource.getOneProduct(any)).thenAnswer((_) async => tProducts);
+        final result = await repository.getOneProduct(1);
+        verify(dataSource.getOneProduct(1));
+        expect(result, Right(tProducts));
+        verifyNoMoreInteractions(dataSource);
+      },
+    );
+    test(
+      "should return [Error Response] when getOneProduct is called unsuccessfully",
+      () async {
+        when(dataSource.getOneProduct(any)).thenThrow(DioException(
+            requestOptions: RequestOptions(),
+            response: Response(
+                requestOptions: RequestOptions(), data: 'Error happened!')));
+        final result = await repository.getOneProduct(1);
+        verify(dataSource.getOneProduct(any));
+        expect(result, const Left(ResponseI(message: 'Error happened!')));
+      },
+    );
+    test(
+      "should return special [Error Response] message, when getOneProduct is called unsuccessfully (500 error)",
+      () async {
+        when(dataSource.getOneProduct(any)).thenThrow(DioException(
+            requestOptions: RequestOptions(),
+            response:
+                Response(statusCode: 500, requestOptions: RequestOptions())));
+        final result = await repository.getOneProduct(1);
+        verify(dataSource.getOneProduct(any));
+        expect(result, left(const ResponseI(message: 'Xəta baş verdi!')));
+      },
+    );
+  });
 }

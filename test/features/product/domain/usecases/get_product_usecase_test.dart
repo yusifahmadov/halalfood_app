@@ -29,7 +29,8 @@ void main() {
             description: '',
             id: 1,
             location: [1, 1],
-            name: 'Test food')
+            name: 'Test food',
+            image: "")
       ];
 
       when(repository.getProducts(any, any))
@@ -45,13 +46,13 @@ void main() {
   test(
     "should return Response from repository when fails",
     () async {
-      final tResponse = const ResponseI(message: '');
+      const tResponse = ResponseI(message: '');
       when(repository.getProducts(any, any))
-          .thenAnswer((_) async => Left(tResponse));
+          .thenAnswer((_) async => const Left(tResponse));
 
       final result = await usecase(PaginationParams());
       verify(repository.getProducts(10, 0));
-      expect(result, Left(tResponse));
+      expect(result, const Left(tResponse));
     },
   );
 }
