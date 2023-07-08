@@ -2,11 +2,13 @@
 // in halalfood/test/features/user/domain/usecase/signup_usecase_test.dart.
 // Do not manually edit this file.
 
-// ignore_for_file: no_leading_underscores_for_library_prefixes, must_be_immutable
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:halalfood/core/error/response.dart' as _i6;
+import 'package:halalfood/features/user/data/models/helper/signup_helper_model.dart'
+    as _i8;
 import 'package:halalfood/features/user/data/models/user_model.dart' as _i3;
 import 'package:halalfood/features/user/domain/entities/user_extended.dart'
     as _i7;
@@ -55,16 +57,11 @@ class MockUserRepository extends _i1.Mock implements _i4.UserRepository {
 
   @override
   _i5.Future<_i2.Either<_i6.ResponseI, _i7.ExtendedUser>> signUp(
-    String? email,
-    String? password,
-  ) =>
+          _i8.SignUpHelperModel? body) =>
       (super.noSuchMethod(
         Invocation.method(
           #signUp,
-          [
-            email,
-            password,
-          ],
+          [body],
         ),
         returnValue:
             _i5.Future<_i2.Either<_i6.ResponseI, _i7.ExtendedUser>>.value(
@@ -72,10 +69,7 @@ class MockUserRepository extends _i1.Mock implements _i4.UserRepository {
           this,
           Invocation.method(
             #signUp,
-            [
-              email,
-              password,
-            ],
+            [body],
           ),
         )),
       ) as _i5.Future<_i2.Either<_i6.ResponseI, _i7.ExtendedUser>>);

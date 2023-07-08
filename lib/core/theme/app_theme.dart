@@ -40,7 +40,7 @@ abstract class ThemeManager {
           side: MaterialStateBorderSide.resolveWith(
             (states) => const BorderSide(width: 1.0, color: Colors.grey),
           ),
-          fillColor: const MaterialStatePropertyAll(changedMainColor),
+          fillColor: const MaterialStatePropertyAll(appMainColor),
           checkColor: const MaterialStatePropertyAll(Colors.white)),
       dialogTheme:
           DialogTheme(backgroundColor: theme.colors.scaffoldBackgroundColor),

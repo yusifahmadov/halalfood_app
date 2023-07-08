@@ -6,7 +6,7 @@ part './kind/light_color.dart';
 @immutable
 class AppColors {
   final Color white = const Color(0xffffffff);
-  final Color green = const Color(0xff98eecc);
+  final Color green = const Color(0xff00BE92);
   final Color lightGreen = Colors.white;
   final Color mediumGrey = const Color.fromARGB(255, 212, 220, 227);
   final Color mediumGreyBold = const Color(0xff748a9d);

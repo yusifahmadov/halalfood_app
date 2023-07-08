@@ -8,3 +8,7 @@ abstract class UserState extends Equatable {
 }
 
 class UserInitial extends UserState {}
+
+class SignupSuccess extends UserState {}
+
+class SignupFailed extends UserState {}

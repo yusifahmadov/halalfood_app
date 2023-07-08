@@ -1,6 +1,9 @@
-class SignupHelper {
+import '../../../data/models/helper/signup_helper_extended_model.dart';
+
+class SignUpHelper {
   String email;
   String password;
-
-  SignupHelper({required this.email, required this.password});
+  SignUpExtendedHelperModel data;
+  SignUpHelper(
+      {required this.email, required this.password, required this.data});
 }

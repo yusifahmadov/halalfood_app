@@ -5,14 +5,15 @@ import 'package:halalfood/features/user/data/datasources/user_remote_data_source
 import 'package:halalfood/features/user/domain/entities/user_extended.dart';
 import 'package:halalfood/features/user/domain/repositories/user_repository.dart';
 
+import '../models/helper/signup_helper_model.dart';
+
 class UserRepositoryImpl implements UserRepository {
   UserRemoteDataSource dataSource;
   UserRepositoryImpl({required this.dataSource});
   @override
-  Future<Either<ResponseI, ExtendedUser>> signUp(
-      String email, String password) async {
+  Future<Either<ResponseI, ExtendedUser>> signUp(SignUpHelperModel body) async {
     try {
-      return Right(await dataSource.signUp(email, password));
+      return Right(await dataSource.signUp(body));
     } on DioException catch (e) {
       if (e.response!.statusCode == 500) {
         return const Left(ResponseI(message: "Xəta baş verdi!"));

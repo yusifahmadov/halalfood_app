@@ -21,17 +21,12 @@ class _UserRemoteDataSourceImpl implements UserRemoteDataSourceImpl {
   String? baseUrl;
 
   @override
-  Future<ExtendedUserModel> signUp(
-    String email,
-    String password,
-  ) async {
+  Future<ExtendedUserModel> signUp(SignUpHelperModel body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = {
-      'email': email,
-      'password': password,
-    };
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<ExtendedUserModel>(Options(
       method: 'POST',

@@ -26,7 +26,7 @@ class LightColors implements IColors {
     appBarColor = colors.white;
     fillColor = colors.lightGrey;
 
-    scaffoldBackgroundColor = colors.darkGrey;
+    scaffoldBackgroundColor = colors.white;
     tabBarColor = colors.green;
     primary = Colors.red;
 
