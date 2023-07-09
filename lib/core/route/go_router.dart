@@ -12,6 +12,8 @@ import 'package:halalfood/features/user/presentation/pages/signin_page_view.dart
 import 'package:halalfood/features/user/presentation/pages/signup_page_view.dart';
 import 'package:halalfood/injection.dart';
 
+import 'error_screen.dart';
+
 final AuthCubit authCubit = getIt<AuthCubit>();
 
 class AppRouter {
@@ -74,18 +76,16 @@ class AppRouter {
         path: '/auth',
         routes: [
           GoRoute(
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: SignupPageView()),
             path: 'signup',
-            builder: (context, state) {
-              return const SignupPageView();
-            },
           ),
           GoRoute(
             path: 'signin',
-            builder: (context, state) {
-              return SignInPageView(
-                authCubit: state.extra as AuthCubit,
-              );
-            },
+            pageBuilder: (context, state) => NoTransitionPage(
+                child: SignInPageView(
+              authCubit: state.extra as AuthCubit,
+            )),
           ),
         ],
         builder: (context, state) {
@@ -94,37 +94,4 @@ class AppRouter {
       ),
     ],
   );
-}
-
-class ErrorScreen extends StatelessWidget {
-  const ErrorScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text(
-          "Xəta",
-        ),
-        elevation: 0,
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-      body: SafeArea(
-        child: Center(
-          child: Text(
-            "Səhifə tapılmadı!",
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey.withOpacity(0.5),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }

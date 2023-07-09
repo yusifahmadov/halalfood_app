@@ -127,3 +127,36 @@ class MockExtendedUser extends _i1.Mock implements _i7.ExtendedUser {
         returnValue: <Object?>[],
       ) as List<Object?>);
 }
+
+/// A class which mocks [SignInHelperModel].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSignInHelperModel extends _i1.Mock implements _i9.SignInHelperModel {
+  MockSignInHelperModel() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String get email => (super.noSuchMethod(
+        Invocation.getter(#email),
+        returnValue: '',
+      ) as String);
+  @override
+  String get password => (super.noSuchMethod(
+        Invocation.getter(#password),
+        returnValue: '',
+      ) as String);
+  @override
+  List<Object?> get props => (super.noSuchMethod(
+        Invocation.getter(#props),
+        returnValue: <Object?>[],
+      ) as List<Object?>);
+  @override
+  Map<String, dynamic> toJson() => (super.noSuchMethod(
+        Invocation.method(
+          #toJson,
+          [],
+        ),
+        returnValue: <String, dynamic>{},
+      ) as Map<String, dynamic>);
+}

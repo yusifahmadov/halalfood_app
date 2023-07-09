@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:halalfood/core/constant/constants.dart';
-import 'package:halalfood/features/main/presentation/cubit/navigation_cubit.dart';
 
 class MainPageView extends StatefulWidget {
   const MainPageView(
@@ -17,7 +16,6 @@ class MainPageView extends StatefulWidget {
 }
 
 class _MainPageViewState extends State<MainPageView> {
-  final NavigationCubit navigationCubit = NavigationCubit();
   @override
   Widget build(BuildContext context) {
     return SafeArea(

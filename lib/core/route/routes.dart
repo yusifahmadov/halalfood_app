@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:halalfood/core/route/go_router.dart';
+
+import 'error_screen.dart';
 
 class Routes {
   static const root = '/';

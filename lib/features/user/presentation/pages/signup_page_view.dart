@@ -58,7 +58,7 @@ class _SignupPageViewState extends State<SignupPageView> {
         bloc: authCubit,
         listener: (context, state) {
           if (state is AuthenticationSuccess) {
-            context.go('/products');
+            context.go('/home');
           }
         },
         child: Padding(

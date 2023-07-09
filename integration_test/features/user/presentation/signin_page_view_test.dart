@@ -35,7 +35,7 @@ void main() {
     await tester.tap(find.text('Giriş et'));
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(CustomTextField).at(0),
-        'test123123@gmail.com'); // if you get success, make sure that you use email is already registered
+        'test123123@gmail.com'); // if you get fail, make sure that you use email is not registered
     await tester.enterText(find.byType(CustomTextField).at(1), 'test123');
 
     await tester.tap(find.byType(CustomTextButton));
