@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:halalfood/features/product/domain/entities/helper/pagination_params.dart';
 import 'package:halalfood/features/product/presentation/cubit/product_cubit.dart';
-import 'package:halalfood/features/product/presentation/pages/product_detail_page_view.dart';
 
 import '../../../../injection.dart';
 import '../../../auth/presentation/cubit/auth_cubit.dart';
 
 class ProductPageView extends StatefulWidget {
-  final AuthCubit authCubit;
-  const ProductPageView({super.key, required this.authCubit});
+  const ProductPageView({
+    super.key,
+  });
 
   @override
   State<ProductPageView> createState() => _ProductPageViewState();
@@ -24,13 +24,14 @@ class _ProductPageViewState extends State<ProductPageView> {
     super.initState();
   }
 
+  final AuthCubit authCubit = getIt<AuthCubit>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           actions: [
             BlocListener<AuthCubit, AuthState>(
-              bloc: widget.authCubit,
+              bloc: authCubit,
               listener: (context, state) {
                 if (state is AuthenticationFailed) {
                   context.go('/');
@@ -38,7 +39,7 @@ class _ProductPageViewState extends State<ProductPageView> {
               },
               child: IconButton(
                   onPressed: () {
-                    widget.authCubit.loggedOut();
+                    authCubit.loggedOut();
                   },
                   icon: const Icon(
                     Icons.exit_to_app,
@@ -84,13 +85,8 @@ class _ProductPageViewState extends State<ProductPageView> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () async {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => ProductDetailPageView(
-                                        cubit: productCubit,
-                                        id: state.data[index].id,
-                                      )));
+                          context.push('/product/${state.data[index].id}',
+                              extra: [productCubit, state.data[index].id]);
                         },
                         child: Container(
                             padding: const EdgeInsets.all(20),

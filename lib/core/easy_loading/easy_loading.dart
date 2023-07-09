@@ -23,8 +23,8 @@ class EasyLoad {
       ..customAnimation = CustomAnimation();
   }
 
-  static show() {
-    EasyLoading.show(
+  static show() async {
+    await EasyLoading.show(
       dismissOnTap: false,
       maskType: EasyLoadingMaskType.custom,
     );

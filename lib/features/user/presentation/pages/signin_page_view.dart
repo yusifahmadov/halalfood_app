@@ -43,7 +43,7 @@ class _SignInPageViewState extends State<SignInPageView> {
         bloc: widget.authCubit,
         listener: (context, state) {
           if (state is AuthenticationSuccess) {
-            context.go('/products', extra: widget.authCubit);
+            context.go('/home', extra: widget.authCubit);
           }
         },
         child: Padding(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:halalfood/core/theme/app_theme.dart';
 
 import 'core/route/go_router.dart';
@@ -17,7 +18,9 @@ class App extends StatelessWidget {
       child: MaterialApp.router(
         builder: EasyLoading.init(),
         theme: ThemeManager.craeteTheme(AppThemeLight()),
-        routerConfig: router,
+        routeInformationProvider: AppRouter.router.routeInformationProvider,
+        routeInformationParser: AppRouter.router.routeInformationParser,
+        routerDelegate: AppRouter.router.routerDelegate,
       ),
       builder: (context, child) {
         return child!;
