@@ -9,6 +9,8 @@ import 'package:halalfood/features/user/data/datasources/user_remote_data_source
     as _i3;
 import 'package:halalfood/features/user/data/models/extended_user_model.dart'
     as _i2;
+import 'package:halalfood/features/user/data/models/helper/signin_helper_model.dart'
+    as _i6;
 import 'package:halalfood/features/user/data/models/helper/signup_helper_model.dart'
     as _i5;
 import 'package:mockito/mockito.dart' as _i1;
@@ -56,6 +58,22 @@ class MockUserRemoteDataSourceImpl extends _i1.Mock
           this,
           Invocation.method(
             #signUp,
+            [body],
+          ),
+        )),
+      ) as _i4.Future<_i2.ExtendedUserModel>);
+  @override
+  _i4.Future<_i2.ExtendedUserModel> signIn(_i6.SignInHelperModel? body) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signIn,
+          [body],
+        ),
+        returnValue:
+            _i4.Future<_i2.ExtendedUserModel>.value(_FakeExtendedUserModel_0(
+          this,
+          Invocation.method(
+            #signIn,
             [body],
           ),
         )),

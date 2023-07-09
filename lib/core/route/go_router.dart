@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:halalfood/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:halalfood/features/main/presentation/pages/main_page_view.dart';
 import 'package:halalfood/features/product/presentation/pages/product_page_view.dart';
+import 'package:halalfood/features/user/presentation/pages/signin_page_view.dart';
 
 import 'package:halalfood/features/user/presentation/pages/signup_page_view.dart';
 import 'package:halalfood/injection.dart';
@@ -19,6 +21,14 @@ GoRouter router = GoRouter(
             return const SignupPageView();
           },
         ),
+        GoRoute(
+          path: 'signin',
+          builder: (context, state) {
+            return SignInPageView(
+              authCubit: state.extra as AuthCubit,
+            );
+          },
+        ),
       ],
       builder: (context, state) {
         return const MainPageView();
@@ -27,7 +37,9 @@ GoRouter router = GoRouter(
     GoRoute(
       path: '/products',
       builder: (context, state) {
-        return const ProductPageView();
+        return ProductPageView(
+          authCubit: state.extra as AuthCubit,
+        );
       },
     ),
   ],

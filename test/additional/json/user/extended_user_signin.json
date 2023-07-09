@@ -1,0 +1,39 @@
+{
+    "access_token": "eyJhbGciOiJIUzI1NiIsImtpZCI6IlBBck1ZbmhRQUhJNWlacmIiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjg4ODM4NDY2LCJpYXQiOjE2ODg4MzQ4NjYsImlzcyI6Imh0dHBzOi8vaHR0cHM6Ly9rdm9tdWNnbWxyeWthbGtnbXp0Yi5zdXBhYmFzZS5jby9hdXRoL3YxIiwic3ViIjoiZWYyMDk4NmYtMzVjOC00NDY1LTliODUtNGM3MjFlMjk5Njg1IiwiZW1haWwiOiJ5dXNpZmFraG1hZEBlbWFpbC5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6ImVtYWlsIiwicHJvdmlkZXJzIjpbImVtYWlsIl19LCJ1c2VyX21ldGFkYXRhIjp7fSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTY4ODgzNDg2Nn1dLCJzZXNzaW9uX2lkIjoiYjYxNjYxODAtOWM4Ny00MmNkLTk2NTItMzNjNWExNmFkMDhhIn0.QQnq1K3oLLN6S9zHj9GzraYJ3FsbNLQJsFd1h5avFlU",
+    "token_type": "bearer",
+    "expires_in": 3600,
+    "refresh_token": "izEpVo72GmlM_A-BFYoK5Q",
+    "user": {
+        "id": "ef20986f-35c8-4465-9b85-4c721e299685",
+        "aud": "authenticated",
+        "role": "authenticated",
+        "email": "yusifakhmad@email.com",
+        "email_confirmed_at": "2023-07-06T16:25:04.820146Z",
+        "phone": "",
+        "confirmed_at": "2023-07-06T16:25:04.820146Z",
+        "last_sign_in_at": "2023-07-08T16:47:46.304513443Z",
+        "app_metadata": {
+            "provider": "email",
+            "providers": [
+                "email"
+            ]
+        },
+        "user_metadata": {},
+        "identities": [
+            {
+                "id": "ef20986f-35c8-4465-9b85-4c721e299685",
+                "user_id": "ef20986f-35c8-4465-9b85-4c721e299685",
+                "identity_data": {
+                    "email": "yusifakhmad@email.com",
+                    "sub": "ef20986f-35c8-4465-9b85-4c721e299685"
+                },
+                "provider": "email",
+                "last_sign_in_at": "2023-07-06T16:25:04.818508Z",
+                "created_at": "2023-07-06T16:25:04.818547Z",
+                "updated_at": "2023-07-06T16:25:04.818547Z"
+            }
+        ],
+        "created_at": "2023-07-06T16:25:04.814555Z",
+        "updated_at": "2023-07-08T16:47:46.306042Z"
+    }
+}

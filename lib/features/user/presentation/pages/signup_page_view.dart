@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:halalfood/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:halalfood/features/main/presentation/utility/custom_input_decoration.dart';
 import 'package:halalfood/features/main/presentation/widgets/custom_button.dart';
 import 'package:halalfood/features/main/presentation/widgets/custom_text_field.dart';
 import 'package:halalfood/features/user/data/models/helper/signup_helper_extended_model.dart';
 import 'package:halalfood/features/user/presentation/cubit/user_cubit.dart';
+import 'package:halalfood/features/user/presentation/widgets/app_bar.dart';
 
 import 'package:intl/intl.dart';
 
-import '../../../../core/constant/constants.dart';
 import '../../../../injection.dart';
 import '../../data/models/helper/signup_helper_model.dart';
 
@@ -31,16 +32,32 @@ class _SignupPageViewState extends State<SignupPageView> {
 
   final _formKey = GlobalKey<FormState>();
   final UserCubit userCubit = getIt<UserCubit>();
+  final AuthCubit authCubit = getIt<AuthCubit>();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    againPasswordController.dispose();
+    nameController.dispose();
+    surnameController.dispose();
+    ageController.dispose();
+    phoneNumberController.dispose();
+    userCubit.close();
+    authCubit.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(context),
-      body: BlocListener<UserCubit, UserState>(
+      appBar: const CustomReturnAppBar(title: "Qeydiyyat"),
+      body: BlocListener<AuthCubit, AuthState>(
         listenWhen: (previous, current) =>
-            previous != current && (current is SignupSuccess),
-        bloc: userCubit,
+            previous != current && (current is AuthenticationSuccess),
+        bloc: authCubit,
         listener: (context, state) {
-          if (state is SignupSuccess) {
+          if (state is AuthenticationSuccess) {
             context.go('/products');
           }
         },
@@ -93,7 +110,7 @@ class _SignupPageViewState extends State<SignupPageView> {
         key: const Key("ageField"),
         validatorF: (value) {
           if (value == "") {
-            return 'Boş buraxıla bilməz';
+            return 'Boş buraxıla bilməz!';
           }
           if (value!.length != 10) {
             return 'Doğum tarixi tam daxil edilməyib!';
@@ -129,7 +146,7 @@ class _SignupPageViewState extends State<SignupPageView> {
         key: const Key("phoneNumberField"),
         validatorF: (value) {
           if (value == "") {
-            return 'Boş buraxıla bilməz';
+            return 'Boş buraxıla bilməz!';
           }
           if (value!.length != 12) {
             return 'Nömrə tam daxil edilməyib!';
@@ -151,7 +168,7 @@ class _SignupPageViewState extends State<SignupPageView> {
         key: const Key("surnameField"),
         validatorF: (value) {
           if (value == "") {
-            return 'Boş buraxıla bilməz';
+            return 'Boş buraxıla bilməz!';
           }
           return null;
         },
@@ -168,7 +185,7 @@ class _SignupPageViewState extends State<SignupPageView> {
         key: const Key("nameField"),
         validatorF: (value) {
           if (value == "") {
-            return 'Boş buraxıla bilməz';
+            return 'Boş buraxıla bilməz!';
           }
 
           return null;
@@ -191,7 +208,13 @@ class _SignupPageViewState extends State<SignupPageView> {
               context: context,
               validatorF: (value) {
                 if (value == "") {
-                  return 'Boş buraxıla bilməz';
+                  return 'Boş buraxıla bilməz!';
+                }
+                if (value!.length < 6) {
+                  return "Şifrə ən az 6 simvoldan ibarət olmalıdır!";
+                }
+                if (value != passwordController.text) {
+                  return "Şifrələr eyni deyil!";
                 }
                 return null;
               },
@@ -215,6 +238,7 @@ class _SignupPageViewState extends State<SignupPageView> {
       onPressed: () async {
         if (_formKey.currentState!.validate()) {
           userCubit.signUp(
+            authCubit: authCubit,
             helper: SignUpHelperModel(
                 email: emailController.text,
                 password: passwordController.text,
@@ -240,8 +264,15 @@ class _SignupPageViewState extends State<SignupPageView> {
               context: context,
               validatorF: (value) {
                 if (value == "") {
-                  return 'Boş buraxıla bilməz';
+                  return 'Boş buraxıla bilməz!';
                 }
+                if (value!.length < 6) {
+                  return "Şifrə ən az 6 simvoldan ibarət olmalıdır!";
+                }
+                if (value != againPasswordController.text) {
+                  return "Şifrələr eyni deyil!";
+                }
+
                 return null;
               },
               obscureText: snapshot.data,
@@ -264,7 +295,7 @@ class _SignupPageViewState extends State<SignupPageView> {
         key: const Key("emailField"),
         validatorF: (value) {
           if (value == "") {
-            return 'Boş buraxıla bilməz';
+            return 'Boş buraxıla bilməz!';
           }
           if (!RegExp(
                   r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
@@ -279,35 +310,5 @@ class _SignupPageViewState extends State<SignupPageView> {
           context: context,
           hintText: "Email*",
         ));
-  }
-
-  AppBar _appBar(BuildContext context) {
-    return AppBar(
-      elevation: 0,
-      leadingWidth: 70,
-      title: Text(
-        "Qeydiyyat",
-        style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 17),
-      ),
-      leading: GestureDetector(
-        onTap: () {
-          Navigator.pop(context);
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Icon(Icons.arrow_back_ios_new, color: appMainColor),
-            Text(
-              "Geri",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color: appMainColor),
-            )
-          ],
-        ),
-      ),
-    );
   }
 }

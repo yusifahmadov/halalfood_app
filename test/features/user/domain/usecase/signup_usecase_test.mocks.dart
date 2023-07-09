@@ -7,6 +7,8 @@ import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:halalfood/core/error/response.dart' as _i6;
+import 'package:halalfood/features/user/data/models/helper/signin_helper_model.dart'
+    as _i9;
 import 'package:halalfood/features/user/data/models/helper/signup_helper_model.dart'
     as _i8;
 import 'package:halalfood/features/user/data/models/user_model.dart' as _i3;
@@ -69,6 +71,24 @@ class MockUserRepository extends _i1.Mock implements _i4.UserRepository {
           this,
           Invocation.method(
             #signUp,
+            [body],
+          ),
+        )),
+      ) as _i5.Future<_i2.Either<_i6.ResponseI, _i7.ExtendedUser>>);
+  @override
+  _i5.Future<_i2.Either<_i6.ResponseI, _i7.ExtendedUser>> signIn(
+          _i9.SignInHelperModel? body) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signIn,
+          [body],
+        ),
+        returnValue:
+            _i5.Future<_i2.Either<_i6.ResponseI, _i7.ExtendedUser>>.value(
+                _FakeEither_0<_i6.ResponseI, _i7.ExtendedUser>(
+          this,
+          Invocation.method(
+            #signIn,
             [body],
           ),
         )),

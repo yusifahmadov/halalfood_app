@@ -12,3 +12,7 @@ class UserInitial extends UserState {}
 class SignupSuccess extends UserState {}
 
 class SignupFailed extends UserState {}
+
+class SigninSuccess extends UserState {}
+
+class SigninFailed extends UserState {}

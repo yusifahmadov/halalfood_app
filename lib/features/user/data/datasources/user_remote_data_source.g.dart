@@ -9,10 +9,7 @@ part of 'user_remote_data_source.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
 class _UserRemoteDataSourceImpl implements UserRemoteDataSourceImpl {
-  _UserRemoteDataSourceImpl(
-    this._dio, {
-    this.baseUrl,
-  }) {
+  _UserRemoteDataSourceImpl(this._dio) {
     baseUrl ??= 'https://kvomucgmlrykalkgmztb.supabase.co/auth/v1/';
   }
 
@@ -36,6 +33,34 @@ class _UserRemoteDataSourceImpl implements UserRemoteDataSourceImpl {
             .compose(
               _dio.options,
               'signup',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ExtendedUserModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ExtendedUserModel> signIn(SignInHelperModel body) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ExtendedUserModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'token?grant_type=password',
               queryParameters: queryParameters,
               data: _data,
             )

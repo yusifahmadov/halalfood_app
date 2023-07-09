@@ -2,12 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:halalfood/core/dio/interceptor.dart';
+import 'package:halalfood/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:halalfood/features/product/data/datasources/product_remote_data_source.dart';
 import 'package:halalfood/features/product/data/repositories/product_repository_impl.dart';
 import 'package:halalfood/features/product/domain/repositories/product_repository.dart';
 import 'package:halalfood/features/product/domain/usecases/get_one_product_usecase.dart';
 import 'package:halalfood/features/product/domain/usecases/get_product_usecase.dart';
 import 'package:halalfood/features/product/presentation/cubit/product_cubit.dart';
+import 'package:halalfood/features/user/domain/usecases/signin_usecase.dart';
 import 'package:halalfood/features/user/domain/usecases/signup_usecase.dart';
 import 'package:halalfood/features/user/presentation/cubit/user_cubit.dart';
 
@@ -30,8 +32,10 @@ initCubits() {
   getIt.registerFactory(() =>
       ProductCubit(getProductUseCase: getIt(), getOneProductUseCase: getIt()));
   getIt.registerFactory(() => UserCubit(
+        signInUseCase: getIt(),
         signupUseCase: getIt(),
       ));
+  getIt.registerFactory(() => AuthCubit());
 }
 
 initDataSources() {
@@ -45,6 +49,7 @@ initUseCases() {
   getIt.registerLazySingleton(() => GetProductUseCase(repository: getIt()));
   getIt.registerLazySingleton(() => GetOneProductUseCase(repository: getIt()));
   getIt.registerLazySingleton(() => SignupUseCase(repository: getIt()));
+  getIt.registerLazySingleton(() => SignInUseCase(repository: getIt()));
 }
 
 initRepositories() {

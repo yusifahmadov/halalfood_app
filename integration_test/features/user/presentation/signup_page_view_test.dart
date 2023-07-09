@@ -67,7 +67,7 @@ void main() {
 
     await tester.tap(find.byType(CustomTextButton));
     await tester.pumpAndSettle();
-    expect(find.text('Boş buraxıla bilməz'), findsNWidgets(7));
+    expect(find.text('Boş buraxıla bilməz!'), findsNWidgets(7));
   });
 
   testWidgets('test text field suffix icon for date of birth', (tester) async {

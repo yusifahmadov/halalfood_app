@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:halalfood/features/product/domain/entities/helper/pagination_params.dart';
 import 'package:halalfood/features/product/presentation/cubit/product_cubit.dart';
 import 'package:halalfood/features/product/presentation/pages/product_detail_page_view.dart';
 
 import '../../../../injection.dart';
+import '../../../auth/presentation/cubit/auth_cubit.dart';
 
 class ProductPageView extends StatefulWidget {
-  const ProductPageView({super.key});
+  final AuthCubit authCubit;
+  const ProductPageView({super.key, required this.authCubit});
 
   @override
   State<ProductPageView> createState() => _ProductPageViewState();
@@ -25,6 +28,24 @@ class _ProductPageViewState extends State<ProductPageView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          actions: [
+            BlocListener<AuthCubit, AuthState>(
+              bloc: widget.authCubit,
+              listener: (context, state) {
+                if (state is AuthenticationFailed) {
+                  context.go('/');
+                }
+              },
+              child: IconButton(
+                  onPressed: () {
+                    widget.authCubit.loggedOut();
+                  },
+                  icon: const Icon(
+                    Icons.exit_to_app,
+                    color: Colors.black,
+                  )),
+            )
+          ],
           elevation: 0,
           title: Text(
             "Məhsullar",

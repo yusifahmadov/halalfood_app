@@ -6,12 +6,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:halalfood/core/error/response.dart';
 import 'package:halalfood/features/user/data/datasources/user_remote_data_source.dart';
 import 'package:halalfood/features/user/data/models/extended_user_model.dart';
+import 'package:halalfood/features/user/data/models/helper/signin_helper_model.dart';
 import 'package:halalfood/features/user/data/models/helper/signup_helper_extended_model.dart';
 import 'package:halalfood/features/user/data/models/helper/signup_helper_model.dart';
 import 'package:halalfood/features/user/data/repositories/user_repository_impl.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../../../custom_test/nice_test.dart';
 import '../../../../additional/json_reader/json_reader.dart';
 import 'user_repository_impl_test.mocks.dart';
 
@@ -19,15 +21,14 @@ import 'user_repository_impl_test.mocks.dart';
 void main() {
   late UserRepositoryImpl repository;
   late MockUserRemoteDataSourceImpl dataSource;
-
+  final tExtendedUser = ExtendedUserModel.fromJson(
+      (jsonDecode(jsonReader('user/extended_user.json'))));
   setUp(() {
     dataSource = MockUserRemoteDataSourceImpl();
     repository = UserRepositoryImpl(dataSource: dataSource);
   });
 
   group('signUp', () {
-    final tExtendedUser = ExtendedUserModel.fromJson(
-        (jsonDecode(jsonReader('user/extended_user.json'))));
     final tSignUpHelper = SignUpHelperModel(
         email: "test1@gmail.com",
         password: "test123",
@@ -67,8 +68,25 @@ void main() {
                 Response(statusCode: 500, requestOptions: RequestOptions())));
         final result = await repository.signUp(tSignUpHelper);
         verify(dataSource.signUp(any));
-        expect(result, left(const ResponseI(message: 'Xəta baş verdi!')));
+        expect(result, const Left(ResponseI(message: 'Xəta baş verdi!')));
       },
+    );
+  });
+
+  group('signIn', () {
+    const tSignInHelper = SignInHelperModel(
+      email: "test1@gmail.com",
+      password: "test123",
+    );
+    niceTest<UserRepositoryImpl>(
+      'should return a user when signIn is called from dataSource',
+      setUp: () {
+        when(dataSource.signIn(any)).thenAnswer((_) async => tExtendedUser);
+      },
+      build: () => repository,
+      act: (act) => act.signIn(tSignInHelper),
+      verify: () async => await dataSource.signIn(tSignInHelper),
+      expect: () => Right(tExtendedUser),
     );
   });
 }
