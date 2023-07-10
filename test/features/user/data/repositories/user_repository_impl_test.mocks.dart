@@ -13,6 +13,7 @@ import 'package:halalfood/features/user/data/models/helper/signin_helper_model.d
     as _i6;
 import 'package:halalfood/features/user/data/models/helper/signup_helper_model.dart'
     as _i5;
+import 'package:halalfood/features/user/data/models/user_model.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -78,4 +79,12 @@ class MockUserRemoteDataSourceImpl extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.ExtendedUserModel>);
+  @override
+  _i4.Future<List<_i7.UserModel>> getOneUser(String? id) => (super.noSuchMethod(
+        Invocation.method(
+          #getOneUser,
+          [id],
+        ),
+        returnValue: _i4.Future<List<_i7.UserModel>>.value(<_i7.UserModel>[]),
+      ) as _i4.Future<List<_i7.UserModel>>);
 }

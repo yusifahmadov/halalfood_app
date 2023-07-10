@@ -9,6 +9,7 @@ import 'package:halalfood/features/product/domain/repositories/product_repositor
 import 'package:halalfood/features/product/domain/usecases/get_one_product_usecase.dart';
 import 'package:halalfood/features/product/domain/usecases/get_product_usecase.dart';
 import 'package:halalfood/features/product/presentation/cubit/product_cubit.dart';
+import 'package:halalfood/features/user/domain/usecases/get_one_user_usecase.dart';
 import 'package:halalfood/features/user/domain/usecases/signin_usecase.dart';
 import 'package:halalfood/features/user/domain/usecases/signup_usecase.dart';
 import 'package:halalfood/features/user/presentation/cubit/user_cubit.dart';
@@ -33,6 +34,7 @@ initCubits() {
       ProductCubit(getProductUseCase: getIt(), getOneProductUseCase: getIt()));
   getIt.registerFactory(() => UserCubit(
         signInUseCase: getIt(),
+        getOneUserUseCase: getIt(),
         signupUseCase: getIt(),
       ));
   getIt.registerFactory(() => AuthCubit());
@@ -50,6 +52,7 @@ initUseCases() {
   getIt.registerLazySingleton(() => GetOneProductUseCase(repository: getIt()));
   getIt.registerLazySingleton(() => SignupUseCase(repository: getIt()));
   getIt.registerLazySingleton(() => SignInUseCase(repository: getIt()));
+  getIt.registerLazySingleton(() => GetOneUserUseCase(repository: getIt()));
 }
 
 initRepositories() {

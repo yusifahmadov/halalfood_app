@@ -9,6 +9,7 @@ import 'package:halalfood/features/user/data/models/extended_user_model.dart';
 import 'package:halalfood/features/user/data/models/helper/signin_helper_model.dart';
 import 'package:halalfood/features/user/data/models/helper/signup_helper_extended_model.dart';
 import 'package:halalfood/features/user/data/models/helper/signup_helper_model.dart';
+import 'package:halalfood/features/user/data/models/user_model.dart';
 import 'package:halalfood/features/user/data/repositories/user_repository_impl.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -23,6 +24,10 @@ void main() {
   late MockUserRemoteDataSourceImpl dataSource;
   final tExtendedUser = ExtendedUserModel.fromJson(
       (jsonDecode(jsonReader('user/extended_user.json'))));
+
+  final tUser = ((jsonDecode(jsonReader('user/user.json'))) as List)
+      .map((e) => UserModel.fromJson(e))
+      .toList();
   setUp(() {
     dataSource = MockUserRemoteDataSourceImpl();
     repository = UserRepositoryImpl(dataSource: dataSource);
@@ -87,6 +92,18 @@ void main() {
       act: (act) => act.signIn(tSignInHelper),
       verify: () async => await dataSource.signIn(tSignInHelper),
       expect: () => Right(tExtendedUser),
+    );
+  });
+
+  group('getOneUser', () {
+    niceTest(
+      'should return a List<User> data from dataSource',
+      setUp: () =>
+          when(dataSource.getOneUser(any)).thenAnswer((_) async => tUser),
+      build: () => repository,
+      act: (act) async => await act.getOneUser('1'),
+      verify: () => dataSource.getOneUser('1'),
+      expect: () => Right(tUser),
     );
   });
 }

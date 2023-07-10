@@ -28,10 +28,6 @@ void main() {
   });
   final tUserExtended = MockExtendedUser();
 
-  const tSignInHelper = SignInHelperModel(
-    email: "test1@gmail.com",
-    password: "test123",
-  );
   final tSignUpHelper = SignUpHelperModel(
       email: "test1@gmail.com",
       password: "test123",

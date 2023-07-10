@@ -16,3 +16,15 @@ class SignupFailed extends UserState {}
 class SigninSuccess extends UserState {}
 
 class SigninFailed extends UserState {}
+
+class UserInformationLoaded extends UserState {
+  final User data;
+  const UserInformationLoaded({required this.data});
+}
+
+class UserInformationFailed extends UserState {
+  final ResponseI data;
+  const UserInformationFailed({required this.data});
+}
+
+class UserInformationLoading extends UserState {}

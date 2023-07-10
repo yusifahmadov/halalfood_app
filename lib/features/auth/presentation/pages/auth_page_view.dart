@@ -12,54 +12,56 @@ class AuthPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-              child: Text(
-            "Halal Gida",
-            style: Theme.of(context)
-                .textTheme
-                .displaySmall!
-                .copyWith(color: appMainColor, fontSize: 28),
-          )),
-          const SizedBox(
-            height: 20,
-          ),
-          CustomTextButton(
-            onPressed: () async {
-              context.push('/auth/signup', extra: authCubit);
-            },
-            text: "Qeydiyyat ol",
-            maxSize: true,
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text("Hesabın var?"),
-              const SizedBox(
-                width: 10,
-              ),
-              GestureDetector(
-                onTap: () {
-                  context.push('/auth/signin', extra: authCubit);
-                },
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
                 child: Text(
-                  "Giriş et",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: appMainColor),
+              "Halal Gida",
+              style: Theme.of(context)
+                  .textTheme
+                  .displaySmall!
+                  .copyWith(color: appMainColor, fontSize: 28),
+            )),
+            const SizedBox(
+              height: 20,
+            ),
+            CustomTextButton(
+              onPressed: () async {
+                context.push('/auth/signup', extra: authCubit);
+              },
+              text: "Qeydiyyat ol",
+              maxSize: true,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Hesabın var?"),
+                const SizedBox(
+                  width: 10,
                 ),
-              ),
-            ],
-          )
-        ],
+                GestureDetector(
+                  onTap: () {
+                    context.push('/auth/signin', extra: authCubit);
+                  },
+                  child: Text(
+                    "Giriş et",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(color: appMainColor),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

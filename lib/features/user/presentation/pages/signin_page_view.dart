@@ -30,7 +30,6 @@ class _SignInPageViewState extends State<SignInPageView> {
   @override
   void dispose() {
     emailController.dispose();
-
     passwordController.dispose();
     super.dispose();
   }
@@ -53,71 +52,82 @@ class _SignInPageViewState extends State<SignInPageView> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomTextField(
-                    validatorF: (value) {
-                      if (value == "") {
-                        return 'Boş buraxıla bilməz!';
-                      }
-                      if (!RegExp(
-                              r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                          .hasMatch(value!)) {
-                        return "Düzgün email daxil edilməyib!";
-                      }
-                      return null;
-                    },
-                    controller: emailController,
-                    decoration: CustomInputDecoration(
-                        context: context, hintText: "Email"),
-                    context: context),
+                _emailField(context),
                 const SizedBox(
                   height: 20,
                 ),
-                StreamBuilder<bool>(
-                    stream: userCubit.signInPasswordStream,
-                    initialData: true,
-                    builder: (context, snapshot) {
-                      return CustomTextField(
-                          validatorF: (value) {
-                            if (value == "") {
-                              return 'Boş buraxıla bilməz!';
-                            }
-
-                            return null;
-                          },
-                          controller: passwordController,
-                          obscureText: snapshot.data,
-                          decoration: CustomInputDecoration(
-                              obscureChecker: true,
-                              obscured: snapshot.data,
-                              onObscureChange: () async {
-                                userCubit.updateSigninPasswordControllerValue(
-                                    !snapshot.data!);
-                              },
-                              context: context,
-                              hintText: "Şifrə"),
-                          context: context);
-                    }),
+                _passwordField(),
                 const SizedBox(
                   height: 20,
                 ),
-                CustomTextButton(
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      userCubit.signIn(
-                          helper: SignInHelperModel(
-                              email: emailController.text,
-                              password: passwordController.text),
-                          authCubit: widget.authCubit);
-                    }
-                  },
-                  text: "Giriş et",
-                  maxSize: true,
-                )
+                _signInButton()
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  CustomTextButton _signInButton() {
+    return CustomTextButton(
+      onPressed: () async {
+        if (_formKey.currentState!.validate()) {
+          userCubit.signIn(
+              helper: SignInHelperModel(
+                  email: emailController.text,
+                  password: passwordController.text),
+              authCubit: widget.authCubit);
+        }
+      },
+      text: "Giriş et",
+      maxSize: true,
+    );
+  }
+
+  StreamBuilder<bool> _passwordField() {
+    return StreamBuilder<bool>(
+        stream: userCubit.signInPasswordStream,
+        initialData: true,
+        builder: (context, snapshot) {
+          return CustomTextField(
+              validatorF: (value) {
+                if (value == "") {
+                  return 'Boş buraxıla bilməz!';
+                }
+
+                return null;
+              },
+              controller: passwordController,
+              obscureText: snapshot.data,
+              decoration: CustomInputDecoration(
+                  obscureChecker: true,
+                  obscured: snapshot.data,
+                  onObscureChange: () async {
+                    userCubit
+                        .updateSigninPasswordControllerValue(!snapshot.data!);
+                  },
+                  context: context,
+                  hintText: "Şifrə"),
+              context: context);
+        });
+  }
+
+  CustomTextField _emailField(BuildContext context) {
+    return CustomTextField(
+        validatorF: (value) {
+          if (value == "") {
+            return 'Boş buraxıla bilməz!';
+          }
+          if (!RegExp(
+                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+              .hasMatch(value!)) {
+            return "Düzgün email daxil edilməyib!";
+          }
+          return null;
+        },
+        controller: emailController,
+        decoration: CustomInputDecoration(context: context, hintText: "Email"),
+        context: context);
   }
 }

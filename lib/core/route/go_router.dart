@@ -58,7 +58,7 @@ class AppRouter {
               parentNavigatorKey: _shellProfileNavigatorKey,
               path: '/profile',
               pageBuilder: (context, state) =>
-                  const NoTransitionPage(child: AccountPageView()),
+                  NoTransitionPage(child: AccountPageView()),
             ),
           ])
         ],

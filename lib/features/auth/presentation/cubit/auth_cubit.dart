@@ -22,6 +22,7 @@ class AuthCubit extends Cubit<AuthState> {
   loggedIn(ExtendedUser data) async {
     emit(AuthenticationLoading());
     await CustomSharedPreferences.saveUser("userdata", data);
+
     emit(const AuthenticationSuccess());
   }
 

@@ -12,6 +12,7 @@ import 'package:halalfood/features/user/data/models/helper/signin_helper_model.d
 import 'package:halalfood/features/user/data/models/helper/signup_helper_model.dart'
     as _i8;
 import 'package:halalfood/features/user/data/models/user_model.dart' as _i3;
+import 'package:halalfood/features/user/domain/entities/user.dart' as _i10;
 import 'package:halalfood/features/user/domain/entities/user_extended.dart'
     as _i7;
 import 'package:halalfood/features/user/domain/repositories/user_repository.dart'
@@ -93,6 +94,24 @@ class MockUserRepository extends _i1.Mock implements _i4.UserRepository {
           ),
         )),
       ) as _i5.Future<_i2.Either<_i6.ResponseI, _i7.ExtendedUser>>);
+  @override
+  _i5.Future<_i2.Either<_i6.ResponseI, List<_i10.User>>> getOneUser(
+          String? id) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getOneUser,
+          [id],
+        ),
+        returnValue:
+            _i5.Future<_i2.Either<_i6.ResponseI, List<_i10.User>>>.value(
+                _FakeEither_0<_i6.ResponseI, List<_i10.User>>(
+          this,
+          Invocation.method(
+            #getOneUser,
+            [id],
+          ),
+        )),
+      ) as _i5.Future<_i2.Either<_i6.ResponseI, List<_i10.User>>>);
 }
 
 /// A class which mocks [ExtendedUser].

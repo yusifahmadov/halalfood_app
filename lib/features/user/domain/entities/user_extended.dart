@@ -7,6 +7,7 @@ class ExtendedUser extends Equatable {
   final String accessToken;
   @JsonKey(name: "refresh_token")
   final String refreshToken;
+  @JsonKey(name: "user")
   final UserModel user;
 
   const ExtendedUser(

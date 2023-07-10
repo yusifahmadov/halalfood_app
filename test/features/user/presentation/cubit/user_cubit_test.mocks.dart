@@ -17,10 +17,13 @@ import 'package:halalfood/features/user/data/models/helper/signin_helper_model.d
 import 'package:halalfood/features/user/data/models/helper/signup_helper_model.dart'
     as _i10;
 import 'package:halalfood/features/user/data/models/user_model.dart' as _i5;
+import 'package:halalfood/features/user/domain/entities/user.dart' as _i16;
 import 'package:halalfood/features/user/domain/entities/user_extended.dart'
     as _i9;
 import 'package:halalfood/features/user/domain/repositories/user_repository.dart'
     as _i2;
+import 'package:halalfood/features/user/domain/usecases/get_one_user_usecase.dart'
+    as _i15;
 import 'package:halalfood/features/user/domain/usecases/signin_usecase.dart'
     as _i11;
 import 'package:halalfood/features/user/domain/usecases/signup_usecase.dart'
@@ -295,4 +298,47 @@ class MockExtendedUserModel extends _i1.Mock implements _i14.ExtendedUserModel {
         ),
         returnValue: <String, dynamic>{},
       ) as Map<String, dynamic>);
+}
+
+/// A class which mocks [GetOneUserUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetOneUserUseCase extends _i1.Mock implements _i15.GetOneUserUseCase {
+  MockGetOneUserUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.UserRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeUserRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i2.UserRepository);
+  @override
+  set repository(_i2.UserRepository? _repository) => super.noSuchMethod(
+        Invocation.setter(
+          #repository,
+          _repository,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i7.Future<_i3.Either<_i8.ResponseI, List<_i16.User>>> call(String? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [params],
+        ),
+        returnValue:
+            _i7.Future<_i3.Either<_i8.ResponseI, List<_i16.User>>>.value(
+                _FakeEither_1<_i8.ResponseI, List<_i16.User>>(
+          this,
+          Invocation.method(
+            #call,
+            [params],
+          ),
+        )),
+      ) as _i7.Future<_i3.Either<_i8.ResponseI, List<_i16.User>>>);
 }
